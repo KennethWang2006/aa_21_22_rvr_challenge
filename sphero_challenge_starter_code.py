@@ -3,16 +3,13 @@ import busio
 import time
 import math
 
-
 import adafruit_hcsr04
 
-sonar = adafruit_hcsr04.HCSR04(trigger_pin=board.D11, echo_pin=board.D10)
+sonar = adafruit_hcsr04.HCSR04(trigger_pin=board.B1, echo_pin=board.B0)
 
 from sphero_rvr import RVRDrive
 
-
-rvr = RVRDrive(uart = busio.UART(board.TX, board.RX, baudrate=115200)
-)
+rvr = RVRDrive(uart = busio.UART(board.A2, board.A3, baudrate=115200))
 time.sleep(0.5)
 
 rvr.set_all_leds(255,0,0) #set leds to red
