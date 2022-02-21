@@ -23,7 +23,7 @@ rvr.set_all_leds(255,255,255) #turn off leds or make them all black
 rvr.sensor_start()
 
 print("starting up")
-setpoint = 100.0
+setpoint = 40.0
 k = 5
 MAX_SPEED = 100
 
@@ -59,12 +59,4 @@ while(elapsed_time < 5.0):
         pass
     time.sleep(0.2)
 
-
-# Drive for two seconds at a heading of 90 degrees
-rvr.drive(30,90)
-time.sleep(2.0)
-rvr.stop()
-
-# Drive back to the starting point
-rvr.drive_to_position_si(0,0,0,0.4)
-time.sleep(3.0)
+# Drive back to the starting point time.sleep(3.0)
