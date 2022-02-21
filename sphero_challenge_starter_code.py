@@ -32,12 +32,12 @@ rvr.update_sensors()
 sensor_distance = sonar.distance
 error = 0
 tolerance = 3
-k = 1
+k = 3
 start_time = time.monotonic()
 elapsed_time = time.monotonic() - start_time
 
 #on off control
-while(elapsed_time < 5.0):
+while(elapsed_time < 15.0):
 
     elapsed_time = time.monotonic() - start_time
 
