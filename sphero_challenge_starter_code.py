@@ -30,13 +30,13 @@ MAX_SPEED = 100
 rvr.update_sensors()
 
 sensor_distance = sonar.distance
-print(sensor_distance)
-error = 100
+error = 0
+tolerance = 3
 start_time = time.monotonic()
 elapsed_time = time.monotonic() - start_time
 
 #on off control
-while(elapsed_time < 3.0):
+while(elapsed_time < 5.0):
 
     elapsed_time = time.monotonic() - start_time
 
@@ -45,6 +45,7 @@ while(elapsed_time < 3.0):
 
         # Add your proportional control code here.
         error = sensor_distance - setpoint
+        
 
         if(error > 0):
             output = 80
