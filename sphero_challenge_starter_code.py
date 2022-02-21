@@ -32,6 +32,7 @@ rvr.update_sensors()
 sensor_distance = sonar.distance
 error = 0
 tolerance = 3
+k = 1
 start_time = time.monotonic()
 elapsed_time = time.monotonic() - start_time
 
@@ -45,12 +46,8 @@ while(elapsed_time < 5.0):
 
         # Add your proportional control code here.
         error = sensor_distance - setpoint
-        
+        output = error*k
 
-        if(error > 0):
-            output = 80
-        elif(error < 0):
-            output = -80
 
         rvr.setMotors(output, output) #set the power of the motors for both the left and right track
             # Read the Sphero RVR library file to find the rvr.setMotors(left,right) command.
