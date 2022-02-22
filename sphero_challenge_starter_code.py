@@ -36,8 +36,8 @@ k = 3
 start_time = time.monotonic()
 elapsed_time = time.monotonic() - start_time
 
-#on off control
-while(elapsed_time < 15.0):
+def moveControlled(v_time, v_setpoint):
+    while(elapsed_time < v_time):
 
     elapsed_time = time.monotonic() - start_time
 
@@ -45,10 +45,10 @@ while(elapsed_time < 15.0):
         sensor_distance = sonar.distance
 
         # Add your proportional control code here.
-        error = sensor_distance - setpoint
+        error = sensor_distance - v_setpoint
         output = error*k
-
-
+        
+        
         rvr.setMotors(output, output) #set the power of the motors for both the left and right track
             # Read the Sphero RVR library file to find the rvr.setMotors(left,right) command.
             # Use this command in the next line to send the output of your proportional
@@ -59,4 +59,45 @@ while(elapsed_time < 15.0):
         pass
     time.sleep(0.2)
 
-# Drive back to the starting point time.sleep(3.0)
+#-------------------------------------------------------------------------
+#Algorithm 1: Go to orange boxes
+while(elapsed_time < .0):
+
+    elapsed_time = time.monotonic() - start_time
+
+    try:
+        sensor_distance = sonar.distance
+
+        # Add your proportional control code here.
+        error = sensor_distance - setpoint
+        output = error*k
+        
+        
+        rvr.setMotors(output, output) #set the power of the motors for both the left and right track
+            # Read the Sphero RVR library file to find the rvr.setMotors(left,right) command.
+            # Use this command in the next line to send the output of your proportional
+            # control to both the left and right motors.
+
+    except RuntimeError:
+        print("Retrying!")
+        pass
+    time.sleep(0.2)
+    
+#Turn 90 degrees clockwise and move drive through the gap (could change with an algorithm but could be repetitive which the function moveControlled could solve)
+#turn 90 degrees clockwise using motor forward and motor backward
+rvr.drive_to_position_si(0,1,0,SPEED) #turn 0 degrees after moving, to these x,y, coordinates at SPEED
+    
+#Algorithm 2: move to location of upper green box
+
+#Algorithm 3: push upper green box and move back to "green box" line
+
+#Algorithm 4: move to location of lower green box
+
+#move inbetween green boxes
+
+#Algorithm 5/6: push both green boxes to the wall
+
+
+
+#Finish
+rvr.stop()
