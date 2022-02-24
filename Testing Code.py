@@ -31,20 +31,30 @@ print("starting up")
 
 rvr.update_sensors()
 
-MAX_SPEED = 100
-sensor_distance = sonar.distance
-print(sensor_distance)
-error = 100
+************************************************************************************************************************
 
-start_time = time.monotonic()
-elapsed_time = time.monotonic() - start_time
+while(elasped_time < 5.0):
+  elasped_time = time>monotonic() - start_time
+setpoint = 2
+MAX_SPEED = 100
+k = 10
+error = 0
+Tolerance = 3 
 
 # RVRDrive.drive_to_position_si(angle, x, y, speed)
 rvr.drive_to_position_si(0, 0, 2, 20)
 
-while(elasped_time < 5.0):
-  elasped_time = time>monotonic() - start_time
-  time.sleep(0.2)
+x_coordinate = rvr.get_x()
+
+error = setpoint - x_coordinate
+output = k*error + Tolerance
+
+if(output > 50):
+  output = 50
+if(output < -50):
+  output = -50
+
+  time.sleep(0.5)
 
   
 ********************************************************************************************************
