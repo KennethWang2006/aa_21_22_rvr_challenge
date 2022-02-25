@@ -39,6 +39,9 @@ tolerance = 3
 k = 2
 start_time = time.monotonic()
 elapsed_time = time.monotonic() - start_time
+RVRDrive.drive(0,90)
+
+  
 
 #def moveControlled(v_time, v_setpoint):
 #    while(elapsed_time < v_time):
