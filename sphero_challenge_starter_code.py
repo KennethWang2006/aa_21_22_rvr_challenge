@@ -33,7 +33,6 @@ MAX_SPEED = 50
 
 rvr.update_sensors()
 
-sensor_distance = sonar.distance
 error = 0
 tolerance = 3
 k = 2
