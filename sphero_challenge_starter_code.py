@@ -19,8 +19,10 @@ time.sleep(0.1)
 rvr.set_all_leds(0,0,255) #set leds to blue
 time.sleep(0.1) #turn off
 rvr.set_all_leds(255,255,255) #turn off leds or make them all black
+time.sleep(0.5)
 
 rvr.sensor_start()
+time.sleep(0.5)
 
 print("starting up")
 setpoint = 40.0
@@ -61,6 +63,8 @@ print("2")
 #    time.sleep(0.2)
 
 #-------------------------------------------------------------------------
+
+
 #Algorithm 1: Go to orange boxes
 print("3")
 while(elapsed_time < 6.0):
@@ -88,29 +92,36 @@ print("4")
 
 set_heading = 90
 tolerance_heading = 3
-output_heading = 20
+output_heading = 150
+
+start_time = time.monotonic()
+elapsed_time = time.monotonic() - start_time
 
 #Algorithm 2: Turn until wanted heading
 while(elapsed_time < 6.0):
     elapsed_time = time.monotonic() - start_time
+    rvr.update_sensors()
+    rvr.set_all_leds(0,0,255) #set leds to blue
+    time.sleep(0.1) #turn off
     
-    try:
-        print(rvr.get_heading())
-        heading = rvr.get_heading()
-        error = set_heading - heading
-        
-        if abs(error) < tolerance_heading:
-            rvr.setMotors(output, output_heading*-1)
-        
+    print(rvr.get_heading())
+    heading = rvr.get_heading()
+    error = set_heading - heading
     
+    if(error > 0):
+        rvr.setMotors(output_heading, output_heading*-1)
+    elif(error < 0):
+        rvr.setMotors(output_heading*-1, output_heading)
 
-
-
-
-
-
+    time.sleep(0.2)
+    
+print("5")
+    
+    
+'''
 
     
+'''
 #Turn 90 degrees clockwise and move drive through the gap (could change with an algorithm but could be repetitive which the function moveControlled could solve)
 #turn 90 degrees clockwise using motor forward and motor backward
 #rvr.drive_to_position_si(0,1,0,SPEED) #turn 0 degrees after moving, to these x,y, coordinates at SPEED
