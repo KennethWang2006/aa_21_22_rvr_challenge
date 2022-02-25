@@ -1,18 +1,13 @@
 
 
 # Write your code here :-)
-import board
-import busio
-import time
-import math
-
-import adafruit_hcsr04
-
-sonar = adafruit_hcsr04.HCSR04(trigger_pin=board.B1, echo_pin=board.B0)
+import board, busio, time, math, digitalio, adafruit_hcsr04
 
 from sphero_rvr import RVRDrive
+from ssis_rvr   import pin
 
-rvr = RVRDrive(uart = busio.UART(board.A2, board.A3, baudrate=115200))
+rvr   = RVRDrive(uart = busio.UART(pin.TX, pin.RX, baudrate=115200))
+sonar = adafruit_hcsr04.HCSR04(trigger_pin=pin.TRIGGER, echo_pin=pin.ECHO)
 
 
 time.sleep(0.5)
@@ -32,15 +27,15 @@ setpoint = 40.0
 MAX_SPEED = 50
 
 rvr.update_sensors()
+print("1")
 
 error = 0
 tolerance = 3
-k = 2
+k = 3
 start_time = time.monotonic()
 elapsed_time = time.monotonic() - start_time
-RVRDrive.drive(0,90)
 
-  
+print("2")
 
 #def moveControlled(v_time, v_setpoint):
 #    while(elapsed_time < v_time):
@@ -67,6 +62,7 @@ RVRDrive.drive(0,90)
 
 #-------------------------------------------------------------------------
 #Algorithm 1: Go to orange boxes
+print("3")
 while(elapsed_time < 6.0):
 
     elapsed_time = time.monotonic() - start_time
@@ -88,6 +84,32 @@ while(elapsed_time < 6.0):
         print("Retrying!")
         pass
     time.sleep(0.2)
+print("4")
+
+set_heading = 90
+tolerance_heading = 3
+output_heading = 20
+
+#Algorithm 2: Turn until wanted heading
+while(elapsed_time < 6.0):
+    elapsed_time = time.monotonic() - start_time
+    
+    try:
+        print(rvr.get_heading())
+        heading = rvr.get_heading()
+        error = set_heading - heading
+        
+        if abs(error) < tolerance_heading:
+            rvr.setMotors(output, output_heading*-1)
+        
+    
+
+
+
+
+
+
+
     
 #Turn 90 degrees clockwise and move drive through the gap (could change with an algorithm but could be repetitive which the function moveControlled could solve)
 #turn 90 degrees clockwise using motor forward and motor backward
