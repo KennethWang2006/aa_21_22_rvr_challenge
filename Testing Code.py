@@ -42,7 +42,7 @@ error = 0
 Tolerance = 3 
 
 # RVRDrive.drive_to_position_si(angle, x, y, speed)
-rvr.drive_to_position_si(0, 0, 2, 20)
+rvr.drive_to_position_si(0, 0, 2, 50)
 
 x_coordinate = rvr.get_x()
 
