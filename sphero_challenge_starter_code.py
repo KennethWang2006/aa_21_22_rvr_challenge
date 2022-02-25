@@ -29,7 +29,7 @@ rvr.sensor_start()
 
 print("starting up")
 setpoint = 40.0
-MAX_SPEED = 100
+MAX_SPEED = 50
 
 rvr.update_sensors()
 
