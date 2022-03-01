@@ -98,6 +98,13 @@ start_time = time.monotonic()
 elapsed_time = time.monotonic() - start_time
 
 #Algorithm 2: Turn until wanted heading
+rvr.drive(140,90)
+time.sleep(1)
+
+rvr.stop()
+
+
+'''
 while(elapsed_time < 6.0):
     elapsed_time = time.monotonic() - start_time
     rvr.update_sensors()
@@ -114,7 +121,7 @@ while(elapsed_time < 6.0):
         rvr.setMotors(output_heading*-1, output_heading)
 
     time.sleep(0.2)
-    
+'''
 print("5")
     
     
