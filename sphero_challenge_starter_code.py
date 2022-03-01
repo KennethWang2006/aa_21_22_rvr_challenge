@@ -33,7 +33,7 @@ print("1")
 
 error = 0
 tolerance = 3
-k = 2.6 29
+k = 2.6
 start_time = time.monotonic()
 elapsed_time = time.monotonic() - start_time
 
@@ -64,10 +64,18 @@ print("2")
 
 #-------------------------------------------------------------------------
 
+rvr.setMotors(160, 160)
+time.sleep(0.5)
+rvr.setMotors(160, 160)
 
+
+time.sleep(0.2)
 #Algorithm 1: Go to orange boxes
+start_time = time.monotonic()
+elapsed_time = time.monotonic() - start_time
+
 print("3")
-while(elapsed_time < 6.0):
+while(elapsed_time < 5.5):
 
     elapsed_time = time.monotonic() - start_time
 
@@ -86,6 +94,10 @@ while(elapsed_time < 6.0):
 
     except RuntimeError:
         print("Retrying!")
+        rvr.set_all_leds(255,0,0) #set leds to red
+        time.sleep(0.1)
+        rvr.set_all_leds(0,255,0) #set leds to green
+        time.sleep(0.1)
         pass
     time.sleep(0.2)
 print("4")
@@ -109,8 +121,8 @@ gap_coordinates = [rvr.get_x(), rvr.get_y()]
 
 time.sleep(0.5)
 
-rvr.drive(50, 45)
-time.sleep(8)
+rvr.drive(70, 45)
+time.sleep(4)
 rvr.stop()
 
 #Algorithm 3: Drive until purple box touches side
@@ -118,8 +130,8 @@ start_time = time.monotonic()
 elapsed_time = time.monotonic() - start_time
 
 setpoint = 285
-k2 = 2
-while(elapsed_time < 6.0):
+k2 = 0.2
+while(elapsed_time < 2.5):
 
     elapsed_time = time.monotonic() - start_time
 
@@ -137,6 +149,10 @@ while(elapsed_time < 6.0):
 
     except RuntimeError:
         print("Retrying!")
+        rvr.set_all_leds(255,0,0) #set leds to red
+        time.sleep(0.1)
+        rvr.set_all_leds(0,255,0) #set leds to green
+        time.sleep(0.1)
         pass
     time.sleep(0.2)
 
