@@ -129,8 +129,8 @@ rvr.stop()
 start_time = time.monotonic()
 elapsed_time = time.monotonic() - start_time
 
-setpoint = 285
-k2 = 0.2
+setpoint = 280
+k2 = 0.05
 while(elapsed_time < 2.5):
 
     elapsed_time = time.monotonic() - start_time
