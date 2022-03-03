@@ -75,7 +75,7 @@ start_time = time.monotonic()
 elapsed_time = time.monotonic() - start_time
 
 print("3")
-while(elapsed_time < 5.5):
+while(elapsed_time < 3):
 
     elapsed_time = time.monotonic() - start_time
 
@@ -113,7 +113,7 @@ elapsed_time = time.monotonic() - start_time
 #rvr.drive_to_position_si(0.5, rvr.get_x(), rvr.get_y(), 0.1)
 
 rvr.drive(50, 90)
-time.sleep(3)
+time.sleep(2)
 rvr.stop()
     
 rvr.update_sensors()
@@ -122,7 +122,7 @@ gap_coordinates = [rvr.get_x(), rvr.get_y()]
 time.sleep(0.5)
 
 rvr.drive(70, 45)
-time.sleep(4)
+time.sleep(3)
 rvr.stop()
 
 #Algorithm 3: Drive until purple box touches side
@@ -130,7 +130,7 @@ start_time = time.monotonic()
 elapsed_time = time.monotonic() - start_time
 
 setpoint = 280
-k2 = 0.05
+k2 = 1
 while(elapsed_time < 2.5):
 
     elapsed_time = time.monotonic() - start_time
@@ -138,9 +138,18 @@ while(elapsed_time < 2.5):
     try:
 
         # Add your proportional control code here.
+        rvr.update_sensors()
+        y_pos = rvr.get_y()
         error = setpoint -  rvr.get_y()
         output = error*k2
         
+        print(f"ypos: {y_pos}")
+        print(f"Error: {error}")
+        
+        if output > 100:
+            output = 100
+            
+    
         
         rvr.setMotors(output, output) #set the power of the motors for both the left and right track
             # Read the Sphero RVR library file to find the rvr.setMotors(left,right) command.
